@@ -15,11 +15,11 @@ import sys
 """
 
 def solution():
-    max = 200000
-    primes = [False] + [True] * (max * 2 - 1)
+    max = 246912
+    primes = [False] + [True] * (max - 1)
     for i in range(1, max):
         if primes[i]:
-            for j in range(i*2+1, len(primes)-1, i+1):
+            for j in range(i*2+1, len(primes), i+1):
                 primes[j] = False
     while True:
         result = 0
