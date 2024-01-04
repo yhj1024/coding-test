@@ -13,9 +13,7 @@ public class Main {
             this.name = name;
             this.index = index;
         }
-        public void print() {
-            System.out.println(age + " " + name);
-        }
+
     }
 
     public static void main(String[] args) throws Exception {
@@ -33,7 +31,7 @@ public class Main {
                 return member1.age - member2.age;
             }
         });
-        Arrays.stream(members).forEach(member -> member.print());
+        Arrays.stream(members).forEach(member -> System.out.println(member.age + " " + member.name));
     }
 
 
