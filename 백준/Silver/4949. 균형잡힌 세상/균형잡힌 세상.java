@@ -7,32 +7,39 @@ public class Main {
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Stack<Character> stack = new Stack<>();
-        String result;
+        StringBuffer sb = new StringBuffer();
         String lines;
+        boolean isNotValid;
         while (true) {
             lines = bf.readLine();
             if(lines.length() == 1 && lines.charAt(0) == '.') {
                 break;
             }
+            isNotValid = false;
             stack.clear();
-            result = "yes";
             for(char c : lines.toCharArray()) {
                 if(c == '(') {
                     stack.add(c);
                 } else if(c == ')') {
-                    if(stack.empty() || '(' != stack.pop())
-                        result = "no";
+                    if(stack.empty() || '(' != stack.pop()) {
+                        isNotValid = true;
+                        break;
+                    }
                 } else if(c == '[') {
                     stack.add(c);
                 } else if(c == ']') {
-                    if(stack.empty() || '[' != stack.pop())
-                        result = "no";
+                    if(stack.empty() || '[' != stack.pop()) {
+                        isNotValid = true;
+                        break;
+                    }
                 }
             }
-            if(!stack.empty())
-                result = "no";
-
-            System.out.println(result);
+            if(!stack.empty() || isNotValid) {
+                sb.append("no\n");
+            } else {
+                sb.append("yes\n");
+            }
         }
+        System.out.println(sb);
     }
 }
