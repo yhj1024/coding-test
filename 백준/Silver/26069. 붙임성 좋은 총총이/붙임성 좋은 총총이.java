@@ -10,23 +10,18 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Set<String> dancers = new HashSet<>();
         dancers.add("ChongChong");
-        int result = 1;
         int N = Integer.parseInt(br.readLine());
         for(int i=0; i<N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             String a = st.nextToken();
             String b = st.nextToken();
-            if(dancers.contains(a) && !dancers.contains(b)) {
-                dancers.add(b);
-                result += 1;
-            }
-            if(dancers.contains(b) && !dancers.contains(a)) {
+            if(dancers.contains(a) || dancers.contains(b)) {
                 dancers.add(a);
-                result += 1;
+                dancers.add(b);
             }
         }
         br.close();
-        System.out.println(result);
+        System.out.println(dancers.size());
     }
 
     // br
