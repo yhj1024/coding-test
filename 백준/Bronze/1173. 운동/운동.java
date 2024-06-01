@@ -37,12 +37,13 @@ public class Main {
 
         int now = m;
         int result = 0;
-        
+
+        if(m + T > M) {
+            System.out.println("-1");
+            return;
+        }
+
         while (N != 0) {
-            if(m + T > M) {
-                System.out.println("-1");
-                return;
-            }
             if(now + T > M) {
                 result+=1;
                 now = Math.max(now - R, m);
