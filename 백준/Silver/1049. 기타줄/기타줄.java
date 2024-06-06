@@ -10,7 +10,7 @@ public class Main {
         // 구매금액
 
         // 낱개 금액 * 6이 패키지 구매 금액보다 높은 경우 무조건 낱개 구매하는게 낫다
-        
+
         // while 구매할 기타줄 개수 > 0
         //  if 패키지 판매 최소 가격 > 낱개 판매 최소가*구매할 기타줄 개수
         //   구매할 기타줄 개수 = 구매할 기타줄 개수 - 6
@@ -31,28 +31,17 @@ public class Main {
             String[] lines = br.readLine().split(" ");
             int packagePrice = Integer.parseInt(lines[0]);
             int singlePrice = Integer.parseInt(lines[1]);
-            if(minPackagePrice > packagePrice) {
-                minPackagePrice = packagePrice;
-            }
-            if(minSinglePrice > singlePrice) {
-                minSinglePrice = singlePrice;
-            }
+            minPackagePrice = Math.min(minPackagePrice, packagePrice);
+            minSinglePrice = Math.min(minSinglePrice, singlePrice);
         }
             
         // 낱개 금액 * 6이 패키지 구매 금액보다 높은 경우 무조건 낱개 구매하는게 낫다
         if(minSinglePrice * 6 <= minPackagePrice) {
-            minPackagePrice = Integer.MAX_VALUE;
+            purchaseAmount = minSinglePrice * N;
+        } else {
+            purchaseAmount = N/6 * minPackagePrice + Math.min(N%6 * minSinglePrice, minPackagePrice);
         }
 
-        while(N > 0) {
-            if(minPackagePrice < N * minSinglePrice) {
-                purchaseAmount += minPackagePrice;
-                N -= 6;
-            } else {
-                purchaseAmount += N * minSinglePrice;
-                N = 0;
-            }
-        }
         System.out.println(purchaseAmount);
     }
 }
