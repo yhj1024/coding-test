@@ -2,8 +2,8 @@ function solution(n) {
     if(n === 0) return 0
     let count = 1;
     let left = 1;
-    let right = 2;
-    let sum = left + right;
+    let right = 1;
+    let sum = 1;
     while(left < n/2) {
         if(sum === n) {
             count += 1;
