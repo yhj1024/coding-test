@@ -1,27 +1,29 @@
-class LRUCache {
+class LRUCacheSet {
     constructor(maxSize) {
         this.maxSize = maxSize;
-        this.cache = new Map();
+        this.cache = new Set();
     }
     
     get(key) {
         if (this.cache.has(key)) {
-            const value = this.cache.get(key);
             this.cache.delete(key);
-            this.cache.set(key, value);
+            this.cache.add(key);
             return true;
         }
         return false;
     }
     
-    set(key) {
+    add(key) {
         if (this.cache.has(key)) {
             this.cache.delete(key);
-        } else if (this.cache.size >= this.maxSize) {
-            const firstKey = this.cache.keys().next().value;
-            this.cache.delete(firstKey);
+            this.cache.add(key);
+        } else {
+            if (this.cache.size >= this.maxSize) {
+                const firstKey = this.cache.values().next().value;
+                this.cache.delete(firstKey);
+            }
+            this.cache.add(key);
         }
-        this.cache.set(key, true);
     }
 }
 
@@ -29,14 +31,14 @@ function solution(cacheSize, cities) {
     if (cacheSize === 0) return cities.length * 5;
     
     let result = 0;
-    const cache = new LRUCache(cacheSize);
+    const cache = new LRUCacheSet(cacheSize);
     
     for (const city of cities) {
         const lowerCity = city.toLowerCase();
         if (cache.get(lowerCity)) {
             result += 1;
         } else {
-            cache.set(lowerCity);
+            cache.add(lowerCity);
             result += 5;
         }
     }
